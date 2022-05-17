@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 
-const MainInfo = ({ title, options, btnTitle }) => {
+const MainInfo = ({ title, options, btnTitle, activePage, onChangePage }) => {
   return (
     <section>
       <h2>{title}</h2>
       <p>EUR</p>
-      <button type="button">{btnTitle}</button>
+      <button onClick={(event) => onChangePage(activePage)} type="button">
+        {btnTitle}
+      </button>
       <ul>
         {options.map(({ period, sum }) => (
           <li key={period}>
