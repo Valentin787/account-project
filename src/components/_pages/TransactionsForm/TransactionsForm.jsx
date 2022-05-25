@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Component } from "react";
+
 import LabelInput from "../../shared/LabelInput/LabelInput";
 import s from "./TransactionsForm.module.scss";
 
@@ -26,6 +27,8 @@ class TransactionsForm extends Component {
   };
 
   render() {
+    const { openCategoryList } = this.props;
+
     return (
       <form onSubmit={this.handleSubmitForm} className={s.form}>
         <div className={s.time__container}>
@@ -48,6 +51,7 @@ class TransactionsForm extends Component {
             name="category"
             type="button"
             title="Категория"
+            handleClick={openCategoryList}
           />
         </div>
         <LabelInput

@@ -1,7 +1,14 @@
 import PropTypes from "prop-types";
 import s from "./LabelInput.module.scss";
 
-const LabelInput = ({ type, title, placeholder = null, name, onGetValue }) => {
+const LabelInput = ({
+  type,
+  title,
+  placeholder = null,
+  name,
+  onGetValue,
+  handleClick,
+}) => {
   return (
     <>
       <label className={s.label}>
@@ -27,11 +34,14 @@ const LabelInput = ({ type, title, placeholder = null, name, onGetValue }) => {
       </label>
       <label>
         {title.includes("Категория") && (
-          <select>
-            <option value="Зарплата">Зарплата</option>
-            <option value="Депозит">Депозит</option>
-            <option value="Левак">Левак</option>
-          </select>
+          <>
+            <input onClick={handleClick} type="button" />
+            <select>
+              <option value="Зарплата">Зарплата</option>
+              <option value="Депозит">Депозит</option>
+              <option value="Левак">Левак</option>
+            </select>
+          </>
         )}
       </label>
       <label>

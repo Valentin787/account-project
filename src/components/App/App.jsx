@@ -6,22 +6,25 @@ class App extends Component {
   state = {
     activePage: "main",
     data: [],
+    categories: [],
   };
 
   handleChangePage = (type) => {
     this.setState({ activePage: type });
-    console.log(type);
   };
-
+  addCategories = (newCategory) => {
+    this.setState((prevState) => ({
+      categories: [...prevState.categories, newCategory],
+    }));
+  };
   addData = (newArr) => {
     this.setState((prevState) => {
-      console.log(prevState);
       return { data: [...prevState.data, newArr] };
     });
   };
 
   render() {
-    const { activePage } = this.state;
+    const { activePage, categories } = this.state;
     return (
       <div>
         {activePage === "main" && (
@@ -30,15 +33,21 @@ class App extends Component {
         {activePage === "costs" && (
           <TransactionPage
             onChangePage={this.handleChangePage}
-            onSubmit={this.addData}
+            addData={this.addData}
             transtype="costs"
+            title="Расходы"
+            addCategories={this.addCategories}
+            categories={categories}
           />
         )}
         {activePage === "incomes" && (
           <TransactionPage
             onChangePage={this.handleChangePage}
-            onSubmit={this.addData}
+            addData={this.addData}
             transtype="incomes"
+            title="Доходы"
+            addCategories={this.addCategories}
+            categories={categories}
           />
         )}
         {activePage === "balance" && <h1>Balance</h1>}
