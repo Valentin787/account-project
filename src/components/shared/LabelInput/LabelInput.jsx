@@ -8,6 +8,7 @@ const LabelInput = ({
   name,
   onGetValue,
   handleClick,
+  value,
 }) => {
   return (
     <>
@@ -20,6 +21,7 @@ const LabelInput = ({
             className={s.input}
             type={type}
             placeholder={placeholder}
+            value={value}
           />
         )}
         {title === "День" && (
@@ -29,13 +31,14 @@ const LabelInput = ({
             className={s.input}
             type={type}
             placeholder={placeholder}
+            value={value}
           />
         )}
       </label>
       <label>
         {title.includes("Категория") && (
           <>
-            <input onClick={handleClick} type="button" />
+            <input onClick={handleClick} type="button" value={value} />
             <select>
               <option value="Зарплата">Зарплата</option>
               <option value="Депозит">Депозит</option>
@@ -51,13 +54,19 @@ const LabelInput = ({
             name={name}
             placeholder={placeholder}
             type={type}
+            value={value}
           />
         )}
       </label>
       <label>
         {title === "Валюта" && (
           <div>
-            <input onChange={onGetValue} name={name} type={type} />{" "}
+            <input
+              onChange={onGetValue}
+              name={name}
+              type={type}
+              value={value}
+            />{" "}
             <select>
               <option value="Зарплата">Зарплата</option>
               <option value="Депозит">Депозит</option>
@@ -73,6 +82,7 @@ const LabelInput = ({
             name={name}
             type={type}
             placeholder={placeholder}
+            value={value}
           />
         )}
       </label>

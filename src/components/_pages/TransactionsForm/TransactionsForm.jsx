@@ -5,74 +5,69 @@ import LabelInput from "../../shared/LabelInput/LabelInput";
 import s from "./TransactionsForm.module.scss";
 
 class TransactionsForm extends Component {
-  state = {
-    date: "",
-    time: "",
-    category: "",
-    sum: "",
-    currency: "",
-    comment: "",
-  };
-
-  getInputValue = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: [value] });
-  };
-
   handleSubmitForm = (e) => {
     e.preventDefault();
-    const { onSubmit } = this.props;
-    console.log(this.state);
-    onSubmit(this.state);
+    const { addData, dataForm, transtype } = this.props;
+    console.log(transtype);
+
+    addData({ dataForm, transtype });
   };
 
   render() {
-    const { openCategoryList } = this.props;
+    const { openCategoryList, getInputValue, dataForm, transtype } = this.props;
+    const { date, time, category, currency, sum, comment } = dataForm;
 
     return (
       <form onSubmit={this.handleSubmitForm} className={s.form}>
         <div className={s.time__container}>
           <LabelInput
-            onGetValue={this.getInputValue}
+            onGetValue={getInputValue}
             name="date"
             type="date"
             title="День"
+            value={date}
           />
           <LabelInput
-            onGetValue={this.getInputValue}
+            onGetValue={getInputValue}
             name="time"
             type="time"
             title="Время"
+            value={time}
           />
         </div>
         <div className={s.time__container}>
           <LabelInput
-            onGetValue={this.getInputValue}
+            onGetValue={getInputValue}
+            // value={}
             name="category"
             type="button"
             title="Категория"
             handleClick={openCategoryList}
+            value={category.title}
           />
         </div>
         <LabelInput
-          onGetValue={this.getInputValue}
+          onGetValue={getInputValue}
           name="sum"
           type="text"
           title="Сумма"
           placeholder="Введите сумму"
+          value={sum}
         />
         <LabelInput
-          onGetValue={this.getInputValue}
+          onGetValue={getInputValue}
           name="currency"
           type="button"
           title="Валюта"
+          value={currency}
         />
         <LabelInput
-          onGetValue={this.getInputValue}
+          onGetValue={getInputValue}
           name="comment"
           type="text"
           title="Коментарий"
           placeholder="Комментарий"
+          value={comment}
         />
         <button className={s.btn}>ok</button>
       </form>

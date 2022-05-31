@@ -14,19 +14,36 @@ class TransactionPage extends Component {
     addCategories: PropTypes.func,
     categories: PropTypes.array,
   };
-
   state = {
+    date: "2022-05-28",
+    time: "18:12",
+    category: this.props.categories[0],
+    sum: "",
+    currency: "EUR",
+    comment: "",
     isOpenCategoryList: false,
   };
+
+  getInputValue = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: [value] });
+  };
+
   openCategoryList = () => {
     this.setState({ isOpenCategoryList: true });
   };
   closeCategoryList = () => this.setState({ isOpenCategoryList: false });
 
   render() {
-    const { isOpenCategoryList } = this.state;
-    const { onChangePage, addData, title, addCategories, categories } =
-      this.props;
+    const { isOpenCategoryList, ...dataForm } = this.state;
+    const {
+      onChangePage,
+      addData,
+      title,
+      addCategories,
+      categories,
+      transtype,
+    } = this.props;
 
     return (
       <section className={s.section}>
@@ -44,8 +61,12 @@ class TransactionPage extends Component {
           />
         ) : (
           <TransactionsForm
+            getInputValue={this.getInputValue}
             openCategoryList={this.openCategoryList}
             addData={addData}
+            categories={categories}
+            dataForm={dataForm}
+            transtype={transtype}
           />
         )}
       </section>
