@@ -1,0 +1,54 @@
+{
+  "costs": [
+    {
+      "date": "2022-05-28",
+      "time": "18:12",
+      "category": {
+        "id": "diff",
+        "title": "Разное"
+      },
+      "sum": ["400"],
+      "currency": "EUR",
+      "comment": ["shoping"],
+      "id": 1
+    },
+    {
+      "date": "2022-05-28",
+      "time": "18:12",
+      "category": {
+        "id": "diff",
+        "title": "Разное"
+      },
+      "sum": ["7 500"],
+      "currency": "EUR",
+      "comment": ["buy car"],
+      "id": 2
+    }
+  ],
+  "incomes": [
+    {
+      "date": "2022-05-28",
+      "time": "18:12",
+      "category": {
+        "id": "diff",
+        "title": "Разное"
+      },
+      "sum": ["300"],
+      "currency": "EUR",
+      "comment": ["зарплата"],
+      "id": 1
+    },
+    {
+      "date": "2022-05-28",
+      "time": "18:12",
+      "category": {
+        "id": "diff",
+        "title": "Разное"
+      },
+      "sum": ["1250"],
+      "currency": "EUR",
+      "comment": ["get money"],
+      "id": 2
+    }
+  ]
+}

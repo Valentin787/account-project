@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import TransactionPage from "../_pages/ TransactionPage/TransactionPage";
 import MainPage from "../_pages/MainPage/MainPage";
+import * as api from "../../utils/api";
 
 const STORAGE_COSTS_KEY = "costs";
+
 const STORAGE_INCOMES_KEY = "incomes";
 
 class App extends Component {
@@ -16,27 +18,42 @@ class App extends Component {
         title: "Разное",
       },
     ],
+    error: null,
   };
-  componentDidMount() {
-    const costs = JSON.parse(localStorage.getItem(STORAGE_COSTS_KEY));
+  async componentDidMount() {
+    // LOCAL STORAGE
 
-    const incomes = JSON.parse(localStorage.getItem(STORAGE_INCOMES_KEY));
+    // const costs = JSON.parse(localStorage.getItem(STORAGE_COSTS_KEY));
 
-    costs && this.setState({ costs });
-    incomes && this.setState({ incomes });
+    // const incomes = JSON.parse(localStorage.getItem(STORAGE_INCOMES_KEY));
 
-    console.log(`this.state`, this.state);
+    // costs && this.setState({ costs });
+    // incomes && this.setState({ incomes });
+    try {
+      const costs = await api.getTransactions("costs");
+      const incomes = await api.getTransactions("incomes");
+      this.setState({ costs, incomes });
+    } catch (error) {
+      this.setError(error);
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.costs !== this.state.costs) {
-      localStorage.setItem(STORAGE_COSTS_KEY, JSON.stringify(this.state.costs));
-    }
-    if (prevState.incomes !== this.state.incomes) {
-      localStorage.setItem(
-        STORAGE_INCOMES_KEY,
-        JSON.stringify(this.state.incomes)
-      );
+    // LOCAL STORAGE
+    // if (prevState.costs !== this.state.costs) {
+    //   // localStorage.setItem(STORAGE_COSTS_KEY, JSON.stringify(this.state.costs));
+    //   api.getTransactions("costs")
+    // }
+    // if (prevState.incomes !== this.state.incomes) {
+    //   // localStorage.setItem(
+    //   //   STORAGE_INCOMES_KEY,
+    //   //   JSON.stringify(this.state.incomes)
+    //   // );
+    // }
+
+    if (this.state.error && prevState.error !== this.state.error) {
+      alert(this.state.error.message);
+      this.setError();
     }
   }
 
@@ -54,6 +71,10 @@ class App extends Component {
     });
   };
 
+  setError = (error = null) => {
+    this.setState({ error });
+  };
+
   render() {
     const { activePage, categories } = this.state;
     return (
@@ -69,6 +90,7 @@ class App extends Component {
             title="Расходы"
             addCategories={this.addCategories}
             categories={categories}
+            setError={this.setError}
           />
         )}
         {activePage === "incomes" && (
@@ -79,6 +101,7 @@ class App extends Component {
             title="Доходы"
             addCategories={this.addCategories}
             categories={categories}
+            setError={this.setError}
           />
         )}
         {activePage === "balance" && <h1>Balance</h1>}

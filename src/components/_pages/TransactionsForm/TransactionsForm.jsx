@@ -4,13 +4,18 @@ import { Component } from "react";
 import LabelInput from "../../shared/LabelInput/LabelInput";
 import s from "./TransactionsForm.module.scss";
 
+import * as api from "../../../utils/api";
+
 class TransactionsForm extends Component {
   handleSubmitForm = (e) => {
     e.preventDefault();
-    const { addData, dataForm, transtype } = this.props;
-    console.log(transtype);
+    const { addData, dataForm, transtype, resetInputs, setError } = this.props;
+    api
+      .postTransactions(transtype, dataForm)
+      .then((transaction) => addData({ dataForm: transaction, transtype }))
+      .catch((error) => setError(error));
 
-    addData({ dataForm, transtype });
+    resetInputs();
   };
 
   render() {

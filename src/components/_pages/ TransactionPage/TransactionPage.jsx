@@ -34,6 +34,18 @@ class TransactionPage extends Component {
   };
   closeCategoryList = () => this.setState({ isOpenCategoryList: false });
 
+  resetInputs = () => {
+    this.setState({
+      date: "2022-05-28",
+      time: "18:12",
+      category: this.props.categories[0],
+      sum: "",
+      currency: "EUR",
+      comment: "",
+      isOpenCategoryList: false,
+    });
+  };
+
   render() {
     const { isOpenCategoryList, ...dataForm } = this.state;
     const {
@@ -43,6 +55,7 @@ class TransactionPage extends Component {
       addCategories,
       categories,
       transtype,
+      setError,
     } = this.props;
 
     return (
@@ -67,6 +80,8 @@ class TransactionPage extends Component {
             categories={categories}
             dataForm={dataForm}
             transtype={transtype}
+            resetInputs={this.resetInputs}
+            setError={setError}
           />
         )}
       </section>
