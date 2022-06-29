@@ -23,6 +23,42 @@
       "currency": "EUR",
       "comment": ["buy car"],
       "id": 2
+    },
+    {
+      "date": "2022-05-28",
+      "time": "18:12",
+      "category": {
+        "id": "diff",
+        "title": "Разное"
+      },
+      "sum": "111",
+      "currency": "EUR",
+      "comment": "sadasd",
+      "id": 3
+    },
+    {
+      "date": "2022-05-28",
+      "time": "18:12",
+      "category": {
+        "id": "diff",
+        "title": "Разное"
+      },
+      "sum": "1111",
+      "currency": "EUR",
+      "comment": "asdssa",
+      "id": 4
+    },
+    {
+      "date": "2022-05-28",
+      "time": "18:12",
+      "category": {
+        "id": "diff",
+        "title": "Разное"
+      },
+      "sum": "9999",
+      "currency": "EUR",
+      "comment": "12",
+      "id": 5
     }
   ],
   "incomes": [

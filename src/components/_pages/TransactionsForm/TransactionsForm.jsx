@@ -6,10 +6,19 @@ import s from "./TransactionsForm.module.scss";
 
 import * as api from "../../../utils/api";
 
-class TransactionsForm extends Component {
-  handleSubmitForm = (e) => {
+const TransactionsForm = ({
+  addData,
+  dataForm,
+  transtype,
+  resetInputs,
+  setError,
+  getInputValue,
+  openCategoryList,
+  categories,
+}) => {
+  const handleSubmitForm = (e) => {
     e.preventDefault();
-    const { addData, dataForm, transtype, resetInputs, setError } = this.props;
+
     api
       .postTransactions(transtype, dataForm)
       .then((transaction) => addData({ dataForm: transaction, transtype }))
@@ -17,68 +26,141 @@ class TransactionsForm extends Component {
 
     resetInputs();
   };
-
-  render() {
-    const { openCategoryList, getInputValue, dataForm, transtype } = this.props;
-    const { date, time, category, currency, sum, comment } = dataForm;
-
-    return (
-      <form onSubmit={this.handleSubmitForm} className={s.form}>
-        <div className={s.time__container}>
-          <LabelInput
-            onGetValue={getInputValue}
-            name="date"
-            type="date"
-            title="День"
-            value={date}
-          />
-          <LabelInput
-            onGetValue={getInputValue}
-            name="time"
-            type="time"
-            title="Время"
-            value={time}
-          />
-        </div>
-        <div className={s.time__container}>
-          <LabelInput
-            onGetValue={getInputValue}
-            // value={}
-            name="category"
-            type="button"
-            title="Категория"
-            handleClick={openCategoryList}
-            value={category.title}
-          />
-        </div>
+  const { date, time, category, currency, sum, comment } = dataForm;
+  return (
+    <form onSubmit={handleSubmitForm} className={s.form}>
+      <div className={s.time__container}>
         <LabelInput
           onGetValue={getInputValue}
-          name="sum"
-          type="text"
-          title="Сумма"
-          placeholder="Введите сумму"
-          value={sum}
+          name="date"
+          type="date"
+          title="День"
+          value={date}
         />
         <LabelInput
           onGetValue={getInputValue}
-          name="currency"
+          name="time"
+          type="time"
+          title="Время"
+          value={time}
+        />
+      </div>
+      <div className={s.time__container}>
+        <LabelInput
+          onGetValue={getInputValue}
+          // value={}
+          name="category"
           type="button"
-          title="Валюта"
-          value={currency}
+          title="Категория"
+          handleClick={openCategoryList}
+          value={category[0].title}
         />
-        <LabelInput
-          onGetValue={getInputValue}
-          name="comment"
-          type="text"
-          title="Коментарий"
-          placeholder="Комментарий"
-          value={comment}
-        />
-        <button className={s.btn}>ok</button>
-      </form>
-    );
-  }
-}
+      </div>
+      <LabelInput
+        onGetValue={getInputValue}
+        name="sum"
+        type="text"
+        title="Сумма"
+        placeholder="Введите сумму"
+        value={sum}
+      />
+      <LabelInput
+        onGetValue={getInputValue}
+        name="currency"
+        type="button"
+        title="Валюта"
+        value={currency}
+      />
+      <LabelInput
+        onGetValue={getInputValue}
+        name="comment"
+        type="text"
+        title="Коментарий"
+        placeholder="Комментарий"
+        value={comment}
+      />
+      <button className={s.btn}>ok</button>
+    </form>
+  );
+};
+
+TransactionsForm.propTypes = {};
+
+export default TransactionsForm;
+
+// class TransactionsForm extends Component {
+//   handleSubmitForm = (e) => {
+//     e.preventDefault();
+//     const { addData, dataForm, transtype, resetInputs, setError } = this.props;
+//     api
+//       .postTransactions(transtype, dataForm)
+//       .then((transaction) => addData({ dataForm: transaction, transtype }))
+//       .catch((error) => setError(error));
+
+//     resetInputs();
+//   };
+
+// render() {
+//   const { openCategoryList, getInputValue, dataForm, transtype } = this.props;
+//   const { date, time, category, currency, sum, comment } = dataForm;
+
+//   return (
+//     <form onSubmit={this.handleSubmitForm} className={s.form}>
+//       <div className={s.time__container}>
+//         <LabelInput
+//           onGetValue={getInputValue}
+//           name="date"
+//           type="date"
+//           title="День"
+//           value={date}
+//         />
+//         <LabelInput
+//           onGetValue={getInputValue}
+//           name="time"
+//           type="time"
+//           title="Время"
+//           value={time}
+//         />
+//       </div>
+//       <div className={s.time__container}>
+//         <LabelInput
+//           onGetValue={getInputValue}
+//           // value={}
+//           name="category"
+//           type="button"
+//           title="Категория"
+//           handleClick={openCategoryList}
+//           value={category.title}
+//         />
+//       </div>
+//       <LabelInput
+//         onGetValue={getInputValue}
+//         name="sum"
+//         type="text"
+//         title="Сумма"
+//         placeholder="Введите сумму"
+//         value={sum}
+//       />
+//       <LabelInput
+//         onGetValue={getInputValue}
+//         name="currency"
+//         type="button"
+//         title="Валюта"
+//         value={currency}
+//       />
+//       <LabelInput
+//         onGetValue={getInputValue}
+//         name="comment"
+//         type="text"
+//         title="Коментарий"
+//         placeholder="Комментарий"
+//         value={comment}
+//       />
+//       <button className={s.btn}>ok</button>
+//     </form>
+//   );
+// }
+// }
 
 // const TransactionsForm = () => {
 //   return (
@@ -100,4 +182,4 @@ class TransactionsForm extends Component {
 
 // TransactionsForm.propTypes = {}
 
-export default TransactionsForm;
+// export default TransactionsForm;

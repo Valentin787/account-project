@@ -38,6 +38,7 @@ class CategoriesList extends Component {
     const { inputValue, checkedValue } = this.state;
     const { categories } = this.props;
 
+    console.log(categories);
     return (
       <div>
         <ul>
